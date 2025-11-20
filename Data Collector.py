@@ -45,6 +45,6 @@ def reader(url):
 poke = "https://pokeapi.co/api/v2/pokemon/charizard"
 big = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&outputsize=full&apikey=demo"     
 Gov = "http://api.census.gov/data/2021/pep/population"
-lead = "https://phl.carto.com/api/v2/sql?q=SELECT%20cartodb_id,%20zip_code,%20num_screen%20FROM%20child_blood_lead_levels_by_zip"
+lead = "https://phl.carto.com/api/v2/sql?q=SELECT%20cartodb_id,%20zip_code,%20num_screen,%20num_bll_5plus,%20perc_5plus%20FROM%20child_blood_lead_levels_by_zip"
 reader(lead)
 
