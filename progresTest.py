@@ -6,12 +6,12 @@ import matplotlib.pyplot as plt
 import json
 
 
-def csvReader():
+def csvReader() -> pd.DataFrame:
     df = pd.read_csv('iris.csv')
 
     return df
 
-def trogdorDF():
+def trogdorDF() :
     trogdor = {
         'name': ['Trogdor'],
         'title': ['The Burninator'],
@@ -112,6 +112,6 @@ def ibmPlot(df):
     plt.show()
 
 
-progreSQLTest(ibmDF())
+ibmPlot(ibmDF())
 
 #ibmPlot(ibmDF())
