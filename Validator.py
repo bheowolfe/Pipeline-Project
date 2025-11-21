@@ -1,37 +1,21 @@
 #Validator
-import json
-from jsonschema import validate
+import pandas as pd
+import Reader
+import yaml
 
-leadSchema = {
-              "type" : "object",
-              "properties" : {
-                "id":{"type":"number","pgtype":"int8"},
-                "zip_code":{"type":"number","pgtype":"int4"},
-                "num_screen":{"type":"number","pgtype":"int4"},
-                "num_bll_5plus":{"type":"number","pgtype":"int4"},
-                "perc_5plus":{"type":"number","pgtype":"float8"},
-                "data_redacted":{"type":"boolean","pgtype":"bool"}
-              },
-              "required" : ["id","zip_code"]
-             }
 
-taxSchema = {
-              "type" : "object",
-              "properties" : {
-                "objectid":{"type":"number","pgtype":"int8"},
-                "zip_code":{"type":"number","pgtype":"int4"},
-                "num_props":{"type":"number","pgtype":"int4"},
-                "min_period":{"type":"number","pgtype":"int4"},
-                "max_period":{"type":"number","pgtype":"int4"},
-                "principal":{"type":"number","pgtype":"float32"},
-                "interest":{"type":"number","pgtype":"float32"},
-                "penalty":{"type":"number","pgtype":"float32"},
-                "other":{"type":"number","pgtype":"float32"},
-                "balance":{"type":"number","pgtype":"float32"},
-                "avg_balance":{"type":"number","pgtype":"float32"}
-              },
-              "required" : ["objectid","zip_code"]
-}
+def howManyNull(df):
+    print("Missing values per column:")
+    print(df.isnull().sum())
+
+def validateAPI(df: pd.DataFrame):
+    print("Finish validator for API")
+
+def validateCSV(df: pd.DataFrame):
+    print("Finish validator for csv")
 
 
 
+#with open('sources.yml', 'r') as file:
+#    cfg = yaml.safe_load(file)
+#    howManyNull(Reader.csvReader(cfg))
