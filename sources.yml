@@ -10,21 +10,19 @@ sources:
     target_table: 
     pk: [objectid]
     schema:
-      objectid: int
-      zip_code: int
-      num_props: int
-      min_period: int
-      max_period: int
-      principal: float
-      interest: float
-      penalty: float
-      other: float
-      balance: float
-      avg_balance: float
+      objectid: int8
+      zip_code: int4
+      num_props: int4
+      min_period: int4
+      max_period: int4
+      principal: float64
+      interest: float64
+      penalty: float64
+      other: float64
+      balance: float64
+      avg_balance: float64
     rules:
-      - rule: "zip_code >= 19019"
-      - rule: "zip_code <= 19160"
-      - rule: "zip_code NOT NULL"
+      - rule: "zip_code >= 19019 and zip_code <= 19160"
 
   - name: lead_json
     type: json
@@ -32,13 +30,13 @@ sources:
     target_table: 
     pk: [lead_id]
     schema:
-      id: int
-      zip_code: int
-      num_screen: int
-      num_bll_5plus: int
-      perc_5plus: float
+      id: int8
+      zip_code: int4
+      num_screen: int4
+      num_bll_5plus: int4
+      perc_5plus: float8
       data_redacted: bool
     rules:
-      - rule: "zip_code >= 19019"
-      - rule: "zip_code <= 19160"
-      - rule: "zip_code NOT NULL"
+      - rule: "zip_code >= 19019 and zip_code <= 19160"
+      - rule: "perc_5plus <= 100"
+      - rule: "num_screen >= 55"

@@ -9,5 +9,6 @@ with open('sources.yml', 'r') as file:
     print('csv too')
     apiDF = Reader.apiReader(cfg)
     print('api is ready as well')
-    val.howManyNull(apiDF)
+    v = val.validator(cfg)
+    apiDF,invalid = v.validate(apiDF,'lead_json')
     print('everything is in order')
