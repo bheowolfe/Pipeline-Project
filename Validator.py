@@ -45,7 +45,7 @@ class validator:
         invalid = pd.DataFrame()
         valid = df
         
-        
+
         for rule_spec in rules:
             valid = valid.query(rule_spec['rule'])
         
@@ -97,28 +97,17 @@ class validator:
     def _try_convert_column(self, df: pd.DataFrame, col: str, expected_type: str) -> tuple:
         """
         Attempt to convert a column to the expected type.
-        
-        Args:
-            df: DataFrame (modified in place)
-            col: Column name
-            expected_type: Expected type string
-            
-        Returns:
-            Tuple of (success: bool, error_count: int)
         """
-        conversion_errors = 0
         original_series = df[col].copy()
         
         try:
             if expected_type == 'int':
                 # Try to convert to int, coercing errors to NaN
                 df[col] = pd.to_numeric(df[col], errors='coerce').astype('Int64')
-                conversion_errors = df[col].isna().sum() - original_series.isna().sum()
                 
             elif expected_type == 'float':
                 # Try to convert to float, coercing errors to NaN
                 df[col] = pd.to_numeric(df[col], errors='coerce')
-                conversion_errors = df[col].isna().sum() - original_series.isna().sum()
                 
             elif expected_type == 'bool':
                 # Try to convert to bool
@@ -135,8 +124,6 @@ class validator:
         
 
 
-
-    
     def get_source_config(self, source_name: str) -> Dict[str, Any]:
         """Get the configuration for a specific source."""
         if source_name not in self.sources:

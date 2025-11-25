@@ -1,5 +1,5 @@
 defaults:
-  db_url: postgresql+psycopg2://postgres:pointLester@localhost:5432/hsr
+  db_url: postgresql+psycopg2://postgres:pointLester@localhost:5432/project_1
   batch_size: 5000
   on_conflict: upsert           # options: append | upsert | fail
 

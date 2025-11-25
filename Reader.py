@@ -22,7 +22,6 @@ class reader:
         if source_name not in self.sources:
             raise ValueError(f"Source '{source_name}' not found in config")
         
-        source_config = self.sources[source_name]
         source_path = self.sources[source_name]['path']
         source_type = self.sources[source_name]['type']
 
@@ -48,16 +47,8 @@ class reader:
         else:
             raise requests.exceptions.HTTPError('Failed to retrieve data. Status Code: ' + str(scode))
 
+
     def csvReader(self, path: str) -> pd.DataFrame:
         df = pd.read_csv(path)
 
         return df
-    
-
-
-    #with open('sources.yml', 'r') as file:
-    #    cfg = yaml.safe_load(file)
-    #    print(cfg['sources'][0]['path'])
-    #    csvReader(cfg)
-
-    #apiReader(url)
