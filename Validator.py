@@ -1,3 +1,4 @@
+#Validator
 import pandas as pd
 import yaml
 from typing import Dict, List, Any
@@ -32,10 +33,10 @@ class validator:
         validS,invalidS = self._validate_schema(df, source_config.get('schema', []), source_config['pk'])
         valid,invalidR = self._validate_rules(validS, source_config.get('rules', []))
 
-        invalid = pd.concat([invalidS,invalidR])
+        #invalid = pd.concat([invalidS,invalidR])
         
         
-        return valid, invalid
+        return valid, invalidS, invalidR
     
     
     def _validate_rules(self, df: pd.DataFrame, rules: List[Dict[str, str]]) -> tuple:
@@ -95,9 +96,7 @@ class validator:
 
 
     def _try_convert_column(self, df: pd.DataFrame, col: str, expected_type: str) -> tuple:
-        """
-        Attempt to convert a column to the expected type.
-        """
+        """Attempt to convert a column to the expected type."""
         original_series = df[col].copy()
         
         try:

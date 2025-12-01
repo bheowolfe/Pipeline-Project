@@ -17,14 +17,21 @@ def run():
     apiDF = r.read('lead_api')
     print('api is ready as well')
     v = validator(cfg)
-    apiDF,invalidAPI = v.validate(apiDF,'lead_api')
-    csvDF,invalidCSV = v.validate(csvDF,'tax_csv')
+    apiDF,invalidSchemaAPI, invalidRulesAPI = v.validate(apiDF,'lead_api')
+    csvDF,invalidSchemaCSV, invalidRulesCSV = v.validate(csvDF,'tax_csv')
     c = cleaner(cfg)
     c.clean(apiDF)
     l = loader(cfg)
     l.load(apiDF,"lead_levels")
     l.load(csvDF,"tax_levels")
-    print('everything is in order')
+
+    print('Rows Rejected for violating Schema:')
+    print(invalidSchemaAPI)
+    print(invalidSchemaCSV)
+    print("")
+    print('Rows Rejected for violating Rules:')
+    print(invalidRulesAPI)
+    print(invalidRulesCSV)
 
 def graphOut():
     conn = psy.connect(
@@ -43,7 +50,7 @@ def graphOut():
             
             
 
-            cursor.execute("SELECT zip_code, perc_5plus FROM lead_levels ORDER BY zip_code;")
+            cursor.execute("SELECT zip_code, perc_5plus FROM lead_levels;")
 
             # Fetch results
             records = cursor.fetchall()  # Fetch all rows

@@ -38,4 +38,4 @@ sources:
       data_redacted: bool
     rules:
       - rule: "zip_code >= 19019 and zip_code <= 19160"
-      - rule: "perc_5plus <= 100"
+      - rule: "perc_5plus <= 100 or perc_5plus != perc_5plus"
