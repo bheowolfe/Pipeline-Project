@@ -8,7 +8,7 @@ from Loader import loader
 
 
 def run():
-    with open('sources.yml', 'r') as file:
+    with open('config/sources.yml', 'r') as file:
         cfg = yaml.safe_load(file)
     print('yaml good to go')
     r = reader(cfg)
@@ -32,6 +32,8 @@ def run():
     print('Rows Rejected for violating Rules:')
     print(invalidRulesAPI)
     print(invalidRulesCSV)
+
+
 
 def graphOut():
     conn = psy.connect(
@@ -85,4 +87,4 @@ def graphOut():
                 print("PostgreSQL connection closed.")
 
 run()
-graphOut()
+#graphOut()
