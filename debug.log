@@ -1,0 +1,27 @@
+2025-12-04 14:43:51,558 [INFO] Program started
+2025-12-04 14:43:51,558 [ERROR] Division by zero occurred!
+Traceback (most recent call last):
+  File "c:\Users\bheow\Revature Projects\src\main.py", line 31, in run
+    result = 10 / 0
+             ~~~^~~
+ZeroDivisionError: division by zero
+2025-12-04 14:49:54,450 [INFO] yaml good to go
+2025-12-04 14:50:34,257 [INFO] yaml good to go
+2025-12-04 14:50:34,261 [INFO] csv too
+2025-12-04 14:50:35,592 [INFO] api is ready as well
+2025-12-04 14:50:35,843 [INFO] Rows Rejected for violating Schema:
+2025-12-04 14:50:35,843 [INFO] Empty DataFrame
+Columns: [lead_id, zip_code, num_screen, num_bll_5plus, perc_5plus]
+Index: []
+2025-12-04 14:50:35,845 [INFO]     objectid  zip_code  num_props  min_period  ...   penalty     other    balance  avg_balance
+48        49      <NA>         84        1978  ...  19273.82  89768.61  639088.53       7608.2
+
+[1 rows x 11 columns]
+2025-12-04 14:50:35,858 [INFO] 
+2025-12-04 14:50:35,858 [INFO] Rows Rejected for violating Rules:
+2025-12-04 14:50:35,858 [INFO] Empty DataFrame
+Columns: [lead_id, zip_code, num_screen, num_bll_5plus, perc_5plus]
+Index: []
+2025-12-04 14:50:35,859 [INFO] Empty DataFrame
+Columns: [objectid, zip_code, num_props, min_period, max_period, principal, interest, penalty, other, balance, avg_balance]
+Index: []

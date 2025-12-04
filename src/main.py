@@ -1,6 +1,7 @@
 import yaml
 import matplotlib.pyplot as plt
 import psycopg2 as psy
+import logging
 from Reader import reader
 from Validator import validator
 from Cleaner import cleaner
@@ -8,14 +9,25 @@ from Loader import loader
 
 
 def run():
+    logger = logging.getLogger("app")
+    logger.setLevel(logging.INFO)
+
+    fmt = logging.Formatter("%(asctime)s [%(levelname)s] %(message)s")
+
+    ch = logging.StreamHandler()
+    ch.setFormatter(fmt)
+
+    logger.handlers.clear()
+    logger.addHandler(ch)
+
     with open('config/sources.yml', 'r') as file:
         cfg = yaml.safe_load(file)
-    print('yaml good to go')
+    logger.info('yaml good to go')
     r = reader(cfg)
     csvDF = r.read('tax_csv')    
-    print('csv too')
+    logger.info('csv too')
     apiDF = r.read('lead_api')
-    print('api is ready as well')
+    logger.info('api is ready as well')
     v = validator(cfg)
     apiDF,invalidSchemaAPI, invalidRulesAPI = v.validate(apiDF,'lead_api')
     csvDF,invalidSchemaCSV, invalidRulesCSV = v.validate(csvDF,'tax_csv')
@@ -25,17 +37,27 @@ def run():
     l.load(apiDF,"lead_levels")
     l.load(csvDF,"tax_levels")
 
-    print('Rows Rejected for violating Schema:')
-    print(invalidSchemaAPI)
-    print(invalidSchemaCSV)
-    print("")
-    print('Rows Rejected for violating Rules:')
-    print(invalidRulesAPI)
-    print(invalidRulesCSV)
+    logger.info('Rows Rejected for violating Schema:')
+    logger.info(invalidSchemaAPI)
+    logger.info(invalidSchemaCSV)
+    logger.info('Rows Rejected for violating Rules:')
+    logger.info(invalidRulesAPI)
+    logger.info(invalidRulesCSV)
 
 
 
 def graphOut():
+    logger = logging.getLogger("app")
+    logger.setLevel(logging.INFO)
+
+    fmt = logging.Formatter("%(asctime)s [%(levelname)s] %(message)s")
+
+    ch = logging.StreamHandler()
+    ch.setFormatter(fmt)
+
+    logger.handlers.clear()
+    logger.addHandler(ch)
+
     conn = psy.connect(
             dbname="project_1",
             user="postgres",
@@ -76,7 +98,7 @@ def graphOut():
 
 
         except psy.Error as e:
-            print(f"Error executing query: {e}")
+            logger.info(f"Error executing query: {e}")
 
         finally:
             # Close the cursor and connection
@@ -84,7 +106,7 @@ def graphOut():
                 cursor.close()
             if conn:
                 conn.close()
-                print("PostgreSQL connection closed.")
+                logger.info("PostgreSQL connection closed.")
 
 run()
-#graphOut()
+graphOut()
