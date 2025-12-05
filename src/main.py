@@ -32,7 +32,8 @@ def run():
     apiDF,invalidSchemaAPI, invalidRulesAPI = v.validate(apiDF,'lead_api')
     csvDF,invalidSchemaCSV, invalidRulesCSV = v.validate(csvDF,'tax_csv')
     c = cleaner(cfg)
-    c.clean(apiDF)
+    c.cleanlead(apiDF)
+    c.cleantax(csvDF)
     l = loader(cfg)
     l.load(apiDF,"lead_levels")
     l.load(csvDF,"tax_levels")
@@ -85,7 +86,7 @@ def graphOut():
             axs[0].bar(zip1, perc, color='red')
 
 
-            cursor.execute("SELECT zip_code, balance FROM tax_levels ORDER BY zip_code;")
+            cursor.execute("SELECT zip_code, avg_balance FROM tax_levels ORDER BY zip_code;")
 
             records = cursor.fetchall()  # Fetch all rows
 
